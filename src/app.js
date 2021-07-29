@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import { useState,useEffect } from 'react';
+import { connect } from "react-redux";
+import { useState,useEffect } from "react";
 import "./app.css";
 import Select from "./components/controls/select";
 import Chart from "./components/chart";
@@ -12,23 +12,19 @@ const YEAR_LABEL = "Select Year";
 const App = (props) => {
   const [goal, setgoal] = useState(GOAL_LABEL);
   const [year, setyear] = useState(YEAR_LABEL);
+  const [toggleUT, settoggleUT] = useState(true);
 
   useEffect(() => {
-    /*Call data fetch function when goal or year changes*/
-    fetchData(goal,year);
-  }, [goal,year]);
-
-  const fetchData = (goal, year) => {
     /*Fetch data when all required input data is present and cleanup*/
     if (GOALS_LIST.includes(goal) && YEARS.includes(parseInt(year))) {
-      props.dispatch({ type: 'FETCH', payload: { goal, year:parseInt(year) } });
+      props.dispatch({ type: 'FETCH', payload: { goal, toggleUT,year:parseInt(year) } });
     }
     else {
       if (props.sdg.length!==0) {
         props.dispatch({ type: 'DISPOSE' });
       }
     }
-  }
+  }, [goal,year,toggleUT]);
 
   return (
     <div className="App">

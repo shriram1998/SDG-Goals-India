@@ -19,3 +19,5 @@ export const GOALS_LIST = [
 ];
 
 export const YEARS = [2020, 2019, 2018];
+
+export const UT = ["IND035","IND026","IND025","IND007","IND004","IND001","IND037","IND031","IND034"];
