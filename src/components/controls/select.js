@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Select({ data_list,value,setvalue,label}) {
   return (
-    <div className="goal">
+    <div className="selector">
       <select
         value={value} onChange={(event) => setvalue(event.target.value )}>
         <option>{ label}</option>

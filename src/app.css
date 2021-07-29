@@ -24,7 +24,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .map {
   display: flex;
   background: rgb(206, 217, 252);
@@ -33,8 +32,7 @@
   flex-grow: 1;
 }
 
-.goal,
-.year {
+.selector {
   width: 50%;
   margin: 10px;
 }

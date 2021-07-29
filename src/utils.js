@@ -21,11 +21,10 @@ export const filterData = (data, payload) => {
   return filteredData.map((stateWiseData) => {
     let filteredCharData = stateWiseData.chartdata.filter((charVal) => {
       return payload['goal'].includes(charVal.name)
-    })[0];
+    })[0]['value'];
     return {
       area_name: stateWiseData.area_name,
-      area_code: stateWiseData.area_code,
-      chardata: filteredCharData
+      chartdata: filteredCharData
     }
   });
 }

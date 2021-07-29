@@ -2,9 +2,9 @@ import { connect } from "react-redux";
 import { useState,useEffect } from "react";
 import "./app.css";
 import Select from "./components/controls/select";
-import Chart from "./components/chart";
 import Map from "./components/map";
 import { GOALS_LIST, YEARS } from "./config";
+import BarChart from "./components/chart/BarChart";
 
 const GOAL_LABEL = "Select Goal";
 const YEAR_LABEL = "Select Year";
@@ -12,7 +12,7 @@ const YEAR_LABEL = "Select Year";
 const App = (props) => {
   const [goal, setgoal] = useState(GOAL_LABEL);
   const [year, setyear] = useState(YEAR_LABEL);
-  const [toggleUT, settoggleUT] = useState(true);
+  const [toggleUT, settoggleUT] = useState(false);
 
   useEffect(() => {
     /*Fetch data when all required input data is present and cleanup*/
@@ -33,7 +33,9 @@ const App = (props) => {
           <Select data_list={ GOALS_LIST} value={goal} setvalue={setgoal} label={ GOAL_LABEL}/>
           <Select data_list={ YEARS} value={year} setvalue={setyear} label={ YEAR_LABEL}/>
         </div>
-        <Chart />
+        <div className="chart">
+          <BarChart/>
+        </div>
       </div>
       <Map />
     </div>
