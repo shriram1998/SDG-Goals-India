@@ -6,7 +6,7 @@ export const filterData = (data,payload) => {
  * @param {Object} payload Object with goal and year values
  * @returns Filtered data in the original json format
  */
-  let yearWiseData=data[`_${payload.year}`]
+  let yearWiseData=data[payload.year]
   return yearWiseData.map((stateWiseData) => {
     let filteredCharData = stateWiseData.chartdata.filter((charVal) => {
       return payload['goal'].includes(charVal.name)

@@ -12,6 +12,7 @@ const YEAR_LABEL = "Select Year";
 const App = (props) => {
   const [goal, setgoal] = useState(GOAL_LABEL);
   const [year, setyear] = useState(YEAR_LABEL);
+
   useEffect(() => {
     /*Call data fetch function when goal or year changes*/
     fetchData(goal,year);
@@ -20,7 +21,7 @@ const App = (props) => {
   const fetchData = (goal, year) => {
     /*Fetch data when all required input data is present and cleanup*/
     if (GOALS_LIST.includes(goal) && YEARS.includes(parseInt(year))) {
-      props.dispatch({ type: 'FETCH', payload: { goal, year } });
+      props.dispatch({ type: 'FETCH', payload: { goal, year:parseInt(year) } });
     }
     else {
       if (props.sdg.length!==0) {
@@ -28,7 +29,7 @@ const App = (props) => {
       }
     }
   }
-  console.log(goal,year);
+
   return (
     <div className="App">
       <div className="side">
@@ -44,6 +45,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return {sdg:state.sdg};
+  return {sdg:state.sdg.data};
 }
 export default connect(mapStateToProps)(App);

@@ -1,12 +1,20 @@
-import { createStore, combineReducers,applyMiddleware,compose } from "redux";
-import reduxThunk from 'redux-thunk';
-import * as data from "./data";
-import { filterData } from "./utils";
+import { createStore, combineReducers } from "redux";
 
-function sdgReducer(state = [], action) {
+import { filterData } from "./utils";
+import { YEARS } from "./config";
+
+/*Prepare initial state with all the years data in data folder using config*/
+let data = {}
+YEARS.map((year) => { data[year] = require(`./data/${year}.json`) }); 
+const INITIAL_STATE = {
+  data:[],
+  allYearsData:data
+}
+
+function sdgReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH':
-      return filterData(data, action.payload);
+      return { ...state, ['data']: filterData(state.allYearsData, action.payload) };
     case 'DISPOSE':
       return {...state, ['data']: [] };
     default:
@@ -18,5 +26,4 @@ const allReducers  = combineReducers({
   sdg :sdgReducer,
 });
 
-export const store = createStore(allReducers,
-  compose(applyMiddleware(reduxThunk), window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()));
+export const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
