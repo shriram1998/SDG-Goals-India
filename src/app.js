@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import { useState,useEffect } from "react";
 import "./app.css";
 import Select from "./components/controls/select";
+import Toggle from "./components/controls/toggle";
 import Map from "./components/map";
 import { GOALS_LIST, YEARS } from "./config";
 import BarChart from "./components/chart/BarChart";
-
 const GOAL_LABEL = "Select Goal";
 const YEAR_LABEL = "Select Year";
 
@@ -20,7 +20,7 @@ const App = (props) => {
       props.dispatch({ type: 'FETCH', payload: { goal, toggleUT,year:parseInt(year) } });
     }
     else {
-      if (props.sdg.length!==0) {
+      if (props.sdg.length) {
         props.dispatch({ type: 'DISPOSE' });
       }
     }
@@ -32,6 +32,9 @@ const App = (props) => {
         <div className="control">
           <Select data_list={ GOALS_LIST} value={goal} setvalue={setgoal} label={ GOAL_LABEL}/>
           <Select data_list={ YEARS} value={year} setvalue={setyear} label={ YEAR_LABEL}/>
+        </div>
+        <div className="control">
+          <Toggle data_list={['States', 'UT']} value={toggleUT} togglevalue={ settoggleUT}/>
         </div>
         <div className="chart">
           <BarChart/>

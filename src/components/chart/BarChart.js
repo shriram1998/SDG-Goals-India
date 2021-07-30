@@ -23,7 +23,7 @@ const BarChart = (props) => {
                 labels: labels,
                 datasets: [{
                     data: data,
-                    backgroundColor: "#73BFB8",
+                    backgroundColor: "#00A084",
                     categoryPercentage: data.length>15?0.8:0.5,
                     barPercentage: data.length>15?0.9:0.5,
                 }]
@@ -32,8 +32,18 @@ const BarChart = (props) => {
                 indexAxis: 'y',
                 scales: {
                     y: {
+                        type: 'category',
+                        grid: {
+                            display: false,
+                        }
+                    },
+                    x: {
+                        type:'linear',
                         min: 0,
-                        max: 100
+                        max: 100,
+                        ticks: {
+                            stepSize:20
+                        }
                     }
                 },
                 responsive: true,
