@@ -1,7 +1,17 @@
+:root {
+  --xs-font-size: 0.6em;
+  --sm-font-size: 0.85em;
+  --nm-font-size: 1em;
+  --lg-font-size: 1.25em;
+  --xl-font-size: 1.5em;
+  --primary-font-style: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
 .App {
   display: flex;
   width: 100%;
   height: 100%;
+  font-family: var(--primary-font-style);
 }
 
 .side {
@@ -12,7 +22,7 @@
 }
 
 .control {
-  background: rgb(250, 217, 223);
+  background: rgb(169, 236, 227);
   padding: 1.5%;
   display: flex;
 }
@@ -27,7 +37,7 @@
 }
 .map {
   display: flex;
-  background: rgb(206, 217, 252);
+  /* background: rgb(206, 217, 252); */
   align-items: center;
   justify-content: center;
   flex-grow: 1;
@@ -42,6 +52,10 @@
   width: 100%;
 }
 
+.map-container {
+  min-height: 100%;
+  min-width: 100%;
+}
 /* The switch - the box around the slider */
 .switch {
   position: relative;
@@ -53,7 +67,13 @@
 .toggleSpan {
   padding: 3px;
   margin-bottom: 0.25em;
-  font-size: 0.85em;
+  font-size: var(--nm-font-size);
+  font-weight: lighter;
+}
+.control.toggleDiv {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 /* Hide default HTML checkbox */
 .switch input {
@@ -100,4 +120,35 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.info {
+  padding: 6px 8px;
+  font: 14px/16px var(--primary-font-style);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+.legend {
+  text-align: left;
+  line-height: 10px;
+  color: #555;
+}
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 0.7;
+}
+.info.legend {
+  width: 90px;
+  height: 200px;
+}
+.legendText {
+  font-size: var(--nm-font-size);
 }

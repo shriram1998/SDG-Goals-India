@@ -1,4 +1,5 @@
 import { UT } from "./config";
+
 export const filterData = (data, payload) => {
   /**
  * Helper function to filter data based on selected goal and year
@@ -7,24 +8,31 @@ export const filterData = (data, payload) => {
  * @param {Object} payload Object with goal and year values
  * @returns Filtered data in the original json format
   */
-  let filteredData;
-  if (payload.toggleUT) {
-    filteredData = data[payload.year].filter((stateWiseData) => {
-      return UT.includes(stateWiseData['area_code']);
-    });
-  }
-  else {
-    filteredData=data[payload.year].filter((stateWiseData) => {
-      return !UT.includes(stateWiseData['area_code']);
-    });
-  }
-  return filteredData.map((stateWiseData) => {
-    let filteredCharData = stateWiseData.chartdata.filter((charVal) => {
-      return payload['goal'].includes(charVal.name)
-    })[0]['value'];
+  let codeToSDG={};
+
+  let requiredData= data[payload.year].map((stateWiseData) => {
+    /*Filtering data based on goal, year and toggle value*/
+
+    let filteredChartData = stateWiseData.chartdata.filter((charVal) => {
+      return payload['goal'].includes(charVal.name) //Get score
+    })[0]['value'];   
+
+    let stateCode = parseInt(stateWiseData.area_code >= 10 ?
+      stateWiseData.area_code.slice(-2) :   //For mapping code to geoJSON
+      stateWiseData.area_code.slice(-3));
+    codeToSDG[stateCode] = filteredChartData;
+    
+    if (
+      (payload.toggleUT && !UT.includes(stateWiseData['area_code'])) ||
+      (!payload.toggleUT && UT.includes(stateWiseData['area_code']))
+     ) {
+      return null; //Return null for data that fails toggle condition
+    }
     return {
       area_name: stateWiseData.area_name,
-      chartdata: filteredCharData
+      chartdata: filteredChartData  //Return score which satisfies all conditions
     }
   });
+  requiredData = requiredData.filter((data) => data != null);
+  return [requiredData,codeToSDG];
 }

@@ -56,6 +56,7 @@ const BarChart = (props) => {
             }
         });
         return () => {
+            /*Chart cleanup*/
             barChart.destroy();
         }
     }, [props.sdg]);

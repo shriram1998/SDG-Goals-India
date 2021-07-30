@@ -7,16 +7,32 @@ import { YEARS } from "./config";
 let data = {}
 YEARS.map((year) => { data[year] = require(`./data/${year}.json`) }); 
 const INITIAL_STATE = {
-  data:[],
+  data: [],
+  goal: '',
+  year: null,
+  codeToSDG:null,
   allYearsData:data
 }
 
 function sdgReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH':
-      return { ...state, ['data']: filterData(state.allYearsData, action.payload) };
+      let data = filterData(state.allYearsData, action.payload);
+      return {
+        ...state,
+        goal: action.payload.goal,
+        year: action.payload.year,
+        data: data[0],
+        codeToSDG: data[1]
+      };
     case 'DISPOSE':
-      return {...state, ['data']: [] };
+      return {
+        ...state,
+        goal: '',
+        year:null,
+        data: [],
+        codeToSDG: null
+      };
     default:
       return state;
   }
