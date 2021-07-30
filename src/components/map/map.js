@@ -1,6 +1,6 @@
 import React, { useEffect,useRef } from 'react';
 import { connect } from "react-redux";
-import L from 'leaflet';
+import L from "leaflet";
 
 const Map=(props)=> {
   const chartRef = useRef(null);
@@ -65,7 +65,7 @@ const Map=(props)=> {
       this.update();
       return this._div;
   };
-  // method that we will use to update the control based on feature properties passed
+  // Tooltip update
   info.update = function (properties) {
       this._div.innerHTML = `<h4>${props.goal} - ${props.year}</h4>` +  (properties ?
           '<b>' + properties.st_nm + '</b><br />' + properties.sdgdata
@@ -82,13 +82,13 @@ const Map=(props)=> {
     for (var i = 0; i < grades.length; i++) {
       div.innerHTML +=
         '<p class="item"><i style="background:' + getColor(grades[i] + 1) + '"></i><span class="legendText">' +
-        ' - '+grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</span></p>' : '+');
+        ' - '+grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</span></p>' : '');
     }
     return div;
   };
 
   useEffect(() => {
-    // create map
+    // create a leafet map with India as center
     map=L.map(chartRef.current, {
       center: [23, 82],
       zoom: 5,
@@ -118,8 +118,8 @@ const Map=(props)=> {
             onEachFeature: onEachFeature
           }).addTo(map);
         });
-        info.addTo(map);
-        legend.addTo(map);
+        info.addTo(map); //Info about hover or selection
+        legend.addTo(map); //Legend about color to score mapping
       }
     return () => {
       /*Map cleanup*/

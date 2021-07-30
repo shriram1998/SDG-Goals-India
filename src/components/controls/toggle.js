@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function Toggle({ data_list,value,togglevalue}) {
+export default function Toggle({ data_list, value, togglevalue }) {
+    /*Reusable toggle component*/
     return (
         <>
             <span className="toggleSpan">{data_list[0]}</span>

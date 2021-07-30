@@ -13,7 +13,6 @@
   height: 100%;
   font-family: var(--primary-font-style);
 }
-
 .side {
   width: 40%;
   height: 100%;
@@ -22,13 +21,22 @@
 }
 
 .control {
-  background: rgb(169, 236, 227);
-  padding: 1.5%;
+  padding: 0.3% 1.5%;
   display: flex;
+}
+.control.centeredDiv {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.control.justifiedDiv {
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .chart {
-  /* background: rgb(213, 255, 246); */
   flex-grow: 1;
   display: flex;
   align-items: center;
@@ -37,26 +45,52 @@
 }
 .map {
   display: flex;
-  /* background: rgb(206, 217, 252); */
   align-items: center;
   justify-content: center;
   flex-grow: 1;
 }
-
-.selector {
-  width: 50%;
-  margin: 4px;
-}
-
-.side select {
-  width: 100%;
-}
-
 .map-container {
   min-height: 100%;
   min-width: 100%;
 }
-/* The switch - the box around the slider */
+
+.selector {
+  width: 40%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 4px;
+}
+select {
+  font-family: var(--primary-font-style);
+}
+select option:first-child {
+  font-size: var(--sm-font-size);
+}
+.side select {
+  width: 100%;
+}
+
+.title {
+  font-size: var(--xl-font-size);
+  font-weight: bolder;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 8px 0;
+}
+.titleSpan {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: rgb(51, 28, 104);
+}
+.label {
+  width: 50%;
+  text-align: center;
+}
+.line {
+  margin: 0 20px;
+  padding: 0;
+}
+
+/* Toggle Styling */
 .switch {
   position: relative;
   display: flex;
@@ -68,12 +102,7 @@
   padding: 3px;
   margin-bottom: 0.25em;
   font-size: var(--nm-font-size);
-  font-weight: lighter;
-}
-.control.toggleDiv {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  font-weight: 100;
 }
 /* Hide default HTML checkbox */
 .switch input {
@@ -81,7 +110,6 @@
   width: 0;
   height: 0;
 }
-
 /* The slider */
 .slider {
   position: absolute;
@@ -94,7 +122,6 @@
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
-
 .slider:before {
   position: absolute;
   content: "";
@@ -106,28 +133,27 @@
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
-
 input:checked + .slider:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
-
 /* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }
-
 .slider.round:before {
   border-radius: 50%;
 }
 
+/*Map Styling*/
 .info {
   padding: 6px 8px;
   font: 14px/16px var(--primary-font-style);
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  max-width: 200px;
 }
 .info h4 {
   margin: 0 0 5px;

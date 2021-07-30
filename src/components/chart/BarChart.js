@@ -1,7 +1,9 @@
 import React, { useEffect,useRef} from 'react';
 import Chart from 'chart.js/auto';
 import { connect } from "react-redux";
-
+Chart.defaults.font.size = 12;
+Chart.defaults.font.weight = 500;
+Chart.defaults.font.family = "'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans', Arial, sans-serif";
 const BarChart = (props) => {
     const chartRef = useRef(null);
     let labels = [];
@@ -23,7 +25,9 @@ const BarChart = (props) => {
                 labels: labels,
                 datasets: [{
                     data: data,
-                    backgroundColor: "#00A084",
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    borderWidth:1,
                     categoryPercentage: data.length>15?0.8:0.5,
                     barPercentage: data.length>15?0.9:0.5,
                 }]
@@ -69,6 +73,6 @@ const BarChart = (props) => {
     }
 }
 const mapStateToProps = (state) => {
-  return {sdg:state.sdg.data};
+  return {sdg:state.sdg.chartData};
 }
 export default connect(mapStateToProps)(BarChart);

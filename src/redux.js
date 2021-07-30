@@ -7,7 +7,7 @@ import { YEARS } from "./config";
 let data = {}
 YEARS.map((year) => { data[year] = require(`./data/${year}.json`) }); 
 const INITIAL_STATE = {
-  data: [],
+  chartData: [],
   goal: '',
   year: null,
   codeToSDG:null,
@@ -17,20 +17,22 @@ const INITIAL_STATE = {
 function sdgReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'FETCH':
+      /*To add chart and geo data to state for rendering chart and map*/
       let data = filterData(state.allYearsData, action.payload);
       return {
         ...state,
         goal: action.payload.goal,
         year: action.payload.year,
-        data: data[0],
+        chartData: data[0],
         codeToSDG: data[1]
       };
     case 'DISPOSE':
+      /*Cleanup data when inputs are invalid*/
       return {
         ...state,
         goal: '',
         year:null,
-        data: [],
+        chartData: [],
         codeToSDG: null
       };
     default:

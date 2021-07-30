@@ -1,12 +1,13 @@
 import { connect } from "react-redux";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
+import "leaflet/dist/leaflet.css";
 import "./app.css";
-import 'leaflet/dist/leaflet.css';
 import Select from "./components/controls/select";
 import Toggle from "./components/controls/toggle";
 import Map from "./components/map/map";
-import { GOALS_LIST, YEARS } from "./config";
 import BarChart from "./components/chart/barChart";
+import { GOALS_LIST, YEARS } from "./config";
+
 const GOAL_LABEL = "Select Goal";
 const YEAR_LABEL = "Select Year";
 
@@ -16,7 +17,7 @@ const App = (props) => {
   const [toggleUT, settoggleUT] = useState(false);
 
   useEffect(() => {
-    /*Fetch data when all required input data is present and cleanup*/
+    /*Dispatching fetch and cleanup*/
     if (GOALS_LIST.includes(goal) && YEARS.includes(parseInt(year))) {
       props.dispatch({ type: 'FETCH', payload: { goal, toggleUT,year:parseInt(year) } });
     }
@@ -30,13 +31,22 @@ const App = (props) => {
   return (
     <div className="App">
       <div className="side">
+        <div className="control centeredDiv">
+          <p className="title"><span className="titleSpan">SDG</span> India</p>
+        </div>
+        <hr className="line"/>
+        <div className="control justifiedDiv">
+          <div className="label">Goal</div>
+          <div className="label">Year</div>
+        </div>
         <div className="control">
           <Select data_list={ GOALS_LIST} value={goal} setvalue={setgoal} label={ GOAL_LABEL}/>
           <Select data_list={ YEARS} value={year} setvalue={setyear} label={ YEAR_LABEL}/>
         </div>
-        <div className="control toggleDiv">
+        <div className="control centeredDiv">
           <Toggle data_list={['States', 'UT']} value={toggleUT} togglevalue={ settoggleUT}/>
         </div>
+        <hr className="line"/>
         <div className="chart">
           <BarChart/>
         </div>
@@ -49,6 +59,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return {sdg:state.sdg.data};
+  return {sdg:state.sdg.chartData};
 }
 export default connect(mapStateToProps)(App);
