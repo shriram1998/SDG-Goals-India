@@ -5,9 +5,9 @@ export default function Toggle({ data_list, value, togglevalue }) {
     return (
         <div className="toggleDiv">
             <span className="toggleSpan">{data_list[0]}</span>
-            <label class="switch">
+            <label className="switch">
                 <input type="checkbox" checked={value} onChange={() => { togglevalue(!value) }}/>
-                <span class="slider round"></span>
+                <span className="slider round"></span>
             </label>
             <span className="toggleSpan">{data_list[1]}</span>
         </div>

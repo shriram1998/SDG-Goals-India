@@ -1,9 +1,14 @@
 # SDG India
 
 React application to display Sustainable Development Goals (SDGs) data for Indian states using bar chart and map for the years 2018-2020.
+
 - It is developed using `React` frontend and `Redux` for state management with JSON data from inside the application.
 - It comes with theme controls and optimized for viewing in small devices.
 - It uses `Chartjs` for bar chart and `Leaflet` for Map which fetches map data from `Mapbox` api.
+
+## Live website hosted at Heroku
+
+[SDG India](https://sdg-india.herokuapp.com/)
 
 ## Install
 
@@ -27,7 +32,7 @@ Once completed, the app should be avialable from http://localhost:3000/
 
 <div align="center">
    <br/>
-   <img src="public/assets/SDG.png" alt="Home screen with effects" width="1920" height="600">
+   <img src="public/assets/SDG.png" alt="Home screen with effects" width="1200" height="550">
    <br/>
    <br/>
 </div>
