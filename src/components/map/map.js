@@ -2,6 +2,8 @@ import React, { useEffect,useRef } from 'react';
 import { connect } from "react-redux";
 import L from "leaflet";
 
+const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoic2hyaXJhbTE5OTgiLCJhIjoiY2txeG4zcmFyMGF1bDJ1cDZ1NHFvdHBsNSJ9.MYJmMpgXl7Z2J7yUmNOFeA';
+
 const Map=(props)=> {
   const chartRef = useRef(null);
   let geojson, map;
@@ -69,14 +71,13 @@ const Map=(props)=> {
   info.update = function (properties) {
       this._div.innerHTML = `<h4>${props.goal} - ${props.year}</h4>` +  (properties ?
           '<b>' + properties.st_nm + '</b><br />' + properties.sdgdata
-          : 'Hover over a state');
+          : 'Hover over a State/UT for more details');
   };
 
   /*Legend*/
   legend.onAdd = function (map) {
     let div = L.DomUtil.create('div', 'info legend'),
-      grades = [0,30,40,50,60,70,80,100],
-      labels = [];
+      grades = [0, 30, 40, 50, 60, 70, 80, 100];
 
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
@@ -87,16 +88,16 @@ const Map=(props)=> {
     return div;
   };
 
+  /* eslint-disable */
   useEffect(() => {
     // create a leafet map with India as center
     map=L.map(chartRef.current, {
       center: [23, 82],
       zoom: 5,
       layers: [
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        L.tileLayer(`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${MAPBOX_ACCESS_TOKEN}`, {
           attribution:
-            '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-          zoomOffset: -1
+            '<a href="http://mapbox.com/about/maps" class="mapbox-logo" target="_blank">Mapbox</a>',
         }),
       ]
     });
@@ -106,7 +107,7 @@ const Map=(props)=> {
       fetch('/assets/states_india.geojson')
         .then(response => response.json())
         .then((fetchedFeatures) => {
-          fetchedFeatures.features.map((geoRow)=>{
+          fetchedFeatures.features.forEach((geoRow)=>{
             if(geoRow.properties.state_code in props.codeToSDG){
               geoRow.properties.sdgdata=props.codeToSDG[geoRow.properties.state_code];
               }
@@ -120,6 +121,10 @@ const Map=(props)=> {
         });
         info.addTo(map); //Info about hover or selection
         legend.addTo(map); //Legend about color to score mapping
+        map.fitBounds([
+        [23, 68],
+        [23,96]
+        ]);
       }
     return () => {
       /*Map cleanup*/
@@ -127,6 +132,7 @@ const Map=(props)=> {
       map.remove();
     }
   }, [props.goal,props.year]);
+  /* eslint-enable */
 
   return <div className="map-container" ref={ chartRef}></div>
 }

@@ -15,7 +15,8 @@ const App = (props) => {
   const [goal, setgoal] = useState(GOAL_LABEL);
   const [year, setyear] = useState(YEAR_LABEL);
   const [toggleUT, settoggleUT] = useState(false);
-
+  const [toggleLight, settoggleLight] = useState(false);
+  /* eslint-disable */
   useEffect(() => {
     /*Dispatching fetch and cleanup*/
     if (GOALS_LIST.includes(goal) && YEARS.includes(parseInt(year))) {
@@ -27,9 +28,15 @@ const App = (props) => {
       }
     }
   }, [goal,year,toggleUT]);
+  
+  useEffect(() => {
+    /*Dispatch theme mode to modify chart colors*/
+    props.dispatch({ type: 'TOGGLE_MODE'});
+  }, [toggleLight]);
+  /* eslint-enable */
 
   return (
-    <div className="App">
+    <div className="App" data-theme={ toggleLight===false?"dark":"light"}>
       <div className="side">
         <div className="control centeredDiv">
           <p className="title"><span className="titleSpan">SDG</span> India</p>
@@ -43,8 +50,9 @@ const App = (props) => {
           <Select data_list={ GOALS_LIST} value={goal} setvalue={setgoal} label={ GOAL_LABEL}/>
           <Select data_list={ YEARS} value={year} setvalue={setyear} label={ YEAR_LABEL}/>
         </div>
-        <div className="control centeredDiv">
+        <div className="control justifiedDiv">
           <Toggle data_list={['States', 'UT']} value={toggleUT} togglevalue={ settoggleUT}/>
+          <Toggle data_list={['🌜', '☀️']} value={toggleLight} togglevalue={ settoggleLight}/>
         </div>
         <hr className="line"/>
         <div className="chart">

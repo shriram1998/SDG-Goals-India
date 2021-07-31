@@ -5,13 +5,14 @@ import { YEARS } from "./config";
 
 /*Prepare initial state with all the years data in data folder using config*/
 let data = {}
-YEARS.map((year) => { data[year] = require(`./data/${year}.json`) }); 
+YEARS.forEach((year) => { data[year] = require(`./data/${year}.json`) }); 
 const INITIAL_STATE = {
   chartData: [],
   goal: '',
   year: null,
   codeToSDG:null,
-  allYearsData:data
+  allYearsData: data,
+  themeToggle:false
 }
 
 function sdgReducer(state = INITIAL_STATE, action) {
@@ -35,6 +36,11 @@ function sdgReducer(state = INITIAL_STATE, action) {
         chartData: [],
         codeToSDG: null
       };
+    case 'TOGGLE_MODE':
+      return {
+        ...state,
+        themeToggle:!state.themeToggle,
+      }
     default:
       return state;
   }
@@ -44,4 +50,4 @@ const allReducers  = combineReducers({
   sdg :sdgReducer,
 });
 
-export const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+export const store = createStore(allReducers);

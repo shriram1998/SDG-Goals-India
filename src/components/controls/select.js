@@ -6,9 +6,9 @@ export default function Select({ data_list, value, setvalue, label }) {
     <div className="selector">
       <select
         value={value} onChange={(event) => setvalue(event.target.value )}>
-        <option className="options" selected="selected">{ label}</option>
-        {data_list.map((data) => (
-          <option className="options">{data}</option>
+        <option key="0" className="options">{ label}</option>
+        {data_list.map((data,ix) => (
+          <option key={ix+1} className="options">{data}</option>
         ))}
       </select>
     </div>
