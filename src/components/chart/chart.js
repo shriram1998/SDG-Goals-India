@@ -2,7 +2,7 @@ import React, { useEffect,useRef} from "react";
 import Chart from "chart.js/auto";
 import { connect } from "react-redux";
 
-Chart.defaults.font.size = 12;
+Chart.defaults.font.size = 15;
 Chart.defaults.font.weight = 500;
 Chart.defaults.font.family = "'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans', Arial, sans-serif";
 
@@ -83,4 +83,4 @@ const BarChart = (props) => {
 const mapStateToProps = (state) => {
   return {sdg:state.sdg.chartData,lightMode:state.sdg.lightMode};
 }
-export default connect(mapStateToProps)(BarChart);
+export default connect(mapStateToProps, {})(BarChart);

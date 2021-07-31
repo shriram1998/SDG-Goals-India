@@ -5,7 +5,7 @@ import "./app.css";
 import Select from "./components/controls/select";
 import Toggle from "./components/controls/toggle";
 import Map from "./components/map/map";
-import BarChart from "./components/chart/barChart";
+import BarChart from "./components/chart/chart";
 import { GOALS_LIST, YEARS } from "./config";
 
 const GOAL_LABEL = "Select Goal";
@@ -48,8 +48,8 @@ const App = (props) => {
         </div>
         <hr className="line"/>
         <div className="control justifiedDiv">
-          <div className="label">Goal</div>
-          <div className="label">Year</div>
+          <div className="label">Goal ⛳</div>
+          <div className="label">Year 📅</div>
         </div>
         <div className="control">
           <Select data_list={ GOALS_LIST} value={goal} setvalue={setgoal} label={ GOAL_LABEL}/>

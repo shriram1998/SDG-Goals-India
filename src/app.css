@@ -15,6 +15,7 @@
 .control {
   padding: 0.3% 1.5%;
   display: flex;
+  font-size: var(--sm-font-size);
 }
 .control.centeredDiv {
   width: 100%;
@@ -54,11 +55,15 @@
 }
 select {
   font-family: var(--primary-font-style);
+  font-size: var(--sm-font-size);
   background-color: var(--color-bg);
   color: var(--color);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 3px;
 }
 select option:first-child {
-  font-size: var(--sm-font-size);
+  font-size: var(--xs-font-size);
 }
 .side select {
   width: 100%;
@@ -78,6 +83,7 @@ select option:first-child {
 .label {
   width: 50%;
   text-align: center;
+  font-weight: bold;
 }
 .line {
   margin: 0 20px;
@@ -152,7 +158,8 @@ input:checked + .slider:before {
 /*Map Styling*/
 .info {
   padding: 6px 8px;
-  font: 14px/16px var(--primary-font-style);
+  font-size: var(--nm-font-size);
+  font-style: var(--primary-font-style);
   background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
@@ -177,11 +184,11 @@ input:checked + .slider:before {
   opacity: 0.7;
 }
 .info.legend {
-  width: 90px;
-  height: 200px;
+  width: 100px;
+  height: 215px;
 }
 .legendText {
-  font-size: var(--nm-font-size);
+  font-size: var(--sm-font-size);
 }
 
 @media screen and (max-width: 768px) {

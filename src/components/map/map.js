@@ -2,6 +2,7 @@ import React, { useEffect,useRef } from 'react';
 import { connect } from "react-redux";
 import L from "leaflet";
 
+const INDIA_GEOJSON = require("../../data/states_india.json");
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoic2hyaXJhbTE5OTgiLCJhIjoiY2txeG4zcmFyMGF1bDJ1cDZ1NHFvdHBsNSJ9.MYJmMpgXl7Z2J7yUmNOFeA';
 
 const Map=(props)=> {
@@ -104,27 +105,23 @@ const Map=(props)=> {
     let modifiedFeatures = [];
     if (props.codeToSDG) {
       /*Map sdg scores to geojson data when required inputs are available*/
-      fetch('/assets/states_india.geojson')
-        .then(response => response.json())
-        .then((fetchedFeatures) => {
-          fetchedFeatures.features.forEach((geoRow)=>{
-            if(geoRow.properties.state_code in props.codeToSDG){
-              geoRow.properties.sdgdata=props.codeToSDG[geoRow.properties.state_code];
-              }
-            modifiedFeatures.push(geoRow);
-          });
-          let finalFeatures={type: "FeatureCollection", features:modifiedFeatures};
-          geojson = L.geoJson(finalFeatures, {
-            style: style,
-            onEachFeature: onEachFeature
-          }).addTo(map);
-        });
-        info.addTo(map); //Info about hover or selection
-        legend.addTo(map); //Legend about color to score mapping
-        map.fitBounds([
-        [23, 68],
-        [23,96]
-        ]);
+      INDIA_GEOJSON.features.forEach((geoRow)=>{
+        if(geoRow.properties.state_code in props.codeToSDG){
+          geoRow.properties.sdgdata=props.codeToSDG[geoRow.properties.state_code];
+          }
+        modifiedFeatures.push(geoRow);
+      });
+      let finalFeatures={type: "FeatureCollection", features:modifiedFeatures};
+      geojson = L.geoJson(finalFeatures, {
+        style: style,
+        onEachFeature: onEachFeature
+      }).addTo(map);
+      info.addTo(map); //Info about hover or selection
+      legend.addTo(map); //Legend about color to score mapping
+      map.fitBounds([
+      [23, 68],
+      [23,96]
+      ]);
       }
     return () => {
       /*Map cleanup*/
@@ -140,4 +137,4 @@ const Map=(props)=> {
 const mapStateToProps = (state) => {
   return {codeToSDG:state.sdg.codeToSDG,goal:state.sdg.goal,year:state.sdg.year};
 }
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps,{})(Map);

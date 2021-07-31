@@ -4,16 +4,17 @@
   --color: rgb(3, 3, 41);
   --alternate-color: #555;
   --header-alt-color: rgb(51, 28, 104);
+  --font-scale: 1.2;
 }
 
 [data-theme] {
   background-color: var(--color-bg);
   color: var(--color);
-  --xs-font-size: 0.6em;
-  --sm-font-size: 0.85em;
-  --nm-font-size: 1em;
-  --lg-font-size: 1.25em;
-  --xl-font-size: 1.5em;
+  --xs-font-size: calc(var(--font-scale) * 0.6em);
+  --sm-font-size: calc(var(--font-scale) * 0.85em);
+  --nm-font-size: calc(var(--font-scale) * 1em);
+  --lg-font-size: calc(var(--font-scale) * 1.25em);
+  --xl-font-size: calc(var(--font-scale) * 1.5em);
   --primary-font-style: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
