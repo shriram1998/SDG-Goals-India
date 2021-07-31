@@ -50,4 +50,4 @@ const allReducers  = combineReducers({
   sdg :sdgReducer,
 });
 
-export const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());
+export const store = createStore(allReducers);
