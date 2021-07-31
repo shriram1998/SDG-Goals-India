@@ -103,7 +103,7 @@ const Map=(props)=> {
     let modifiedFeatures = [];
     if (props.codeToSDG) {
       /*Map sdg scores to geojson data when required inputs are available*/
-      fetch('/states_india.geojson')
+      fetch('/assets/states_india.geojson')
         .then(response => response.json())
         .then((fetchedFeatures) => {
           fetchedFeatures.features.map((geoRow)=>{
