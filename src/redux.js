@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   year: null,
   codeToSDG:null,
   allYearsData: data,
-  themeToggle:false
+  lightMode:false
 }
 
 function sdgReducer(state = INITIAL_STATE, action) {
@@ -36,10 +36,10 @@ function sdgReducer(state = INITIAL_STATE, action) {
         chartData: [],
         codeToSDG: null
       };
-    case 'TOGGLE_MODE':
+    case 'SET_THEME':
       return {
         ...state,
-        themeToggle:!state.themeToggle,
+        lightMode:action.payload.lightMode,
       }
     default:
       return state;
@@ -50,4 +50,4 @@ const allReducers  = combineReducers({
   sdg :sdgReducer,
 });
 
-export const store = createStore(allReducers);
+export const store = createStore(allReducers,window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__());

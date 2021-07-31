@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import "./app.css";
 import Select from "./components/controls/select";
@@ -15,8 +15,16 @@ const App = (props) => {
   const [goal, setgoal] = useState(GOAL_LABEL);
   const [year, setyear] = useState(YEAR_LABEL);
   const [toggleUT, settoggleUT] = useState(false);
-  const [toggleLight, settoggleLight] = useState(false);
+  const [lightMode, setlightMode] = useState(false);
+  const mounted = useRef();
   /* eslint-disable */
+    useEffect(() => {
+    /*Dispatch theme mode to modify chart colors*/
+    if (mounted.current) {
+      props.dispatch({ type: 'SET_THEME', payload: { lightMode } });
+    }
+    }, [lightMode]);
+  
   useEffect(() => {
     /*Dispatching fetch and cleanup*/
     if (GOALS_LIST.includes(goal) && YEARS.includes(parseInt(year))) {
@@ -27,16 +35,13 @@ const App = (props) => {
         props.dispatch({ type: 'DISPOSE' });
       }
     }
+    mounted.current = true;
   }, [goal,year,toggleUT]);
   
-  useEffect(() => {
-    /*Dispatch theme mode to modify chart colors*/
-    props.dispatch({ type: 'TOGGLE_MODE'});
-  }, [toggleLight]);
   /* eslint-enable */
 
   return (
-    <div className="App" data-theme={ toggleLight===false?"dark":"light"}>
+    <div className="App" data-theme={ lightMode===false?"dark":"light"}>
       <div className="side">
         <div className="control centeredDiv">
           <p className="title"><span className="titleSpan">SDG</span> India</p>
@@ -52,7 +57,7 @@ const App = (props) => {
         </div>
         <div className="control justifiedDiv">
           <Toggle data_list={['States', 'UT']} value={toggleUT} togglevalue={ settoggleUT}/>
-          <Toggle data_list={['🌜', '☀️']} value={toggleLight} togglevalue={ settoggleLight}/>
+          <Toggle data_list={['🌜', '☀️']} value={lightMode} togglevalue={ setlightMode}/>
         </div>
         <hr className="line"/>
         <div className="chart">

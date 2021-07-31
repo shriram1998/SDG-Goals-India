@@ -15,8 +15,8 @@ const BarChart = (props) => {
     /* eslint-disable */
     useEffect(() => {
         /*Color chart ticks and lines based on theme chosen*/
-        Chart.defaults.color = props.themeToggle?"#FFF":"#000";
-        Chart.defaults.borderColor = props.themeToggle ? "#FFF" : "#000";
+        Chart.defaults.color = props.lightMode ? "#000" : "#FFF";
+        Chart.defaults.borderColor = props.lightMode ? "#000" : "#FFF";
         
         if (props.sdg.length) {
             props.sdg.forEach((val) => {
@@ -71,7 +71,7 @@ const BarChart = (props) => {
             /*Chart cleanup*/
             barChart.destroy();
         }
-    }, [props.sdg,props.themeToggle]);
+    }, [props]);
     /* eslint-enable */
     if (props.sdg.length) {
         return <canvas ref={chartRef} />;
@@ -81,6 +81,6 @@ const BarChart = (props) => {
     }
 }
 const mapStateToProps = (state) => {
-  return {sdg:state.sdg.chartData,themeToggle:state.sdg.themeToggle};
+  return {sdg:state.sdg.chartData,lightMode:state.sdg.lightMode};
 }
 export default connect(mapStateToProps)(BarChart);
