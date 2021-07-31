@@ -1,5 +1,6 @@
 .App {
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
   height: 100%;
   font-family: var(--primary-font-style);
@@ -181,6 +182,14 @@ input:checked + .slider:before {
 }
 .legendText {
   font-size: var(--nm-font-size);
+}
+
+@media screen and (max-width: 768px) {
+  .side,
+  .map {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .mapbox-logo {

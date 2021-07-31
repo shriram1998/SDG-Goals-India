@@ -71,7 +71,7 @@ const Map=(props)=> {
   info.update = function (properties) {
       this._div.innerHTML = `<h4>${props.goal} - ${props.year}</h4>` +  (properties ?
           '<b>' + properties.st_nm + '</b><br />' + properties.sdgdata
-          : 'Hover over a State/UT for more details');
+          : 'Select inputs and hover over a State/UT for more details');
   };
 
   /*Legend*/
