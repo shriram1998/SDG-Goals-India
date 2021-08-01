@@ -43,4 +43,4 @@ Add JSON of new data in `src/data/` and add the year in YEARS variable in `src/c
 
 ## GeoJSON path
 
-Updated GeoJSON can be loaded in `public/assets/` with the same name in future
+Updated GeoJSON can be loaded in `src/data/` with the same name in future
