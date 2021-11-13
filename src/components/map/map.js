@@ -1,12 +1,12 @@
-import React, { useEffect,useRef } from 'react';
+import React, { useEffect,useRef,useState } from 'react';
 import { connect } from "react-redux";
 import L from "leaflet";
 
-const INDIA_GEOJSON = require("../../data/states_india.json");
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoic2hyaXJhbTE5OTgiLCJhIjoiY2txeG4zcmFyMGF1bDJ1cDZ1NHFvdHBsNSJ9.MYJmMpgXl7Z2J7yUmNOFeA';
 
 const Map=(props)=> {
   const chartRef = useRef(null);
+  const [INDIA_GEOJSON, setINDIA_GEOJSON] = useState();
   let geojson, map;
   let info = L.control();
   let legend = L.control({ position: 'bottomright' });
@@ -90,6 +90,10 @@ const Map=(props)=> {
   };
 
   /* eslint-disable */
+  useEffect(async () => {
+    const response = await fetch("https://raw.githubusercontent.com/shriram1998/IndianStates_GeoJSON/main/states_india.json");
+    setINDIA_GEOJSON(await response.json());
+  },[]);
   useEffect(() => {
     // create a leafet map with India as center
     map=L.map(chartRef.current, {

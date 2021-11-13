@@ -17,8 +17,8 @@ const BarChart = (props) => {
         /*Color chart ticks and lines based on theme chosen*/
         Chart.defaults.color = props.lightMode ? "#000" : "#FFF";
         Chart.defaults.borderColor = props.lightMode ? "#000" : "#FFF";
-        
         if (props.sdg.length) {
+            chartRef.current.style.display = 'flex';
             props.sdg.forEach((val) => {
                 if (val.chartdata !== null) {
                     /*Skip states with null values for score*/
@@ -26,6 +26,8 @@ const BarChart = (props) => {
                     data.push(val.chartdata);
                 }
             });
+        } else {
+            chartRef.current.style.display = 'none';
         }
         let barChart = new Chart(chartRef.current, {
             type: 'bar',
@@ -73,12 +75,7 @@ const BarChart = (props) => {
         }
     }, [props]);
     /* eslint-enable */
-    if (props.sdg.length) {
-        return <canvas ref={chartRef} />;
-    }
-    else {
-        return null;
-    }
+    return <canvas ref={chartRef} />;
 }
 const mapStateToProps = (state) => {
   return {sdg:state.sdg.chartData,lightMode:state.sdg.lightMode};
