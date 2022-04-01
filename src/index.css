@@ -1,7 +1,7 @@
 :root,
 [data-theme="default"] {
   --color-bg: white;
-  --color: rgb(3, 3, 41);
+  --color: black;
   --alternate-color: #555;
   --header-alt-color: rgb(51, 28, 104);
   --font-scale: 1.2;
@@ -20,7 +20,7 @@
 }
 
 [data-theme="dark"] {
-  --color-bg: rgb(3, 3, 41);
+  --color-bg: black;
   --color: white;
   --alternate-color: rgb(209, 205, 205);
   --header-alt-color: rgb(176, 233, 243);

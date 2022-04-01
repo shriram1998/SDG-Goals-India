@@ -7,7 +7,7 @@ export const filterData = (data, payload) => {
 
   let requiredData= data[payload.year].map((stateWiseData) => {
     let filteredChartData = stateWiseData.chartdata.filter((charVal) => {
-      return payload['goal'].includes(charVal.name) //Get score
+      return payload['goal'].slice(0,payload['goal'].indexOf(':'))===charVal.name || payload['goal']===charVal.name //Get score
     })[0]['value'];   
 
     let stateCode = parseInt(stateWiseData.area_code >= 10 ?
